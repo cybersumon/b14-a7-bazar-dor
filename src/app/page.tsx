@@ -1,30 +1,49 @@
+
 import Hero from "@/components/home/Hero";
+import HomeProducts from "@/components/home/HomeProducts";
+import { ProductSkeletonGrid } from "@/components/product/ProductSkeleton";
+
+import { Suspense } from "react";
 
 
 export default function Home() {
+
+
+
+
+
   return (
 
     <>
     
     <Hero />
+<Suspense
+// fallback={
+//   <div className="mx-auto max-w-6xl px-4 py-16">
+// <p className="text-gray-500">
+//   পণ্যের তথ্য লোড হচ্ছে...
 
-    <section
-    id="all-products" className="mx-auto max-w-6xl px-4 py-16"
-    
-    >
+// </p>
 
-      <h2 className="text-2xl font-bold text-gray-900">
-সব পণ্য
-      </h2>
+//   </div>
 
-      <p className="mt-2 text-gray-600">
-        এখানে পরে সব পণ্যের তালিকা দেখানো হবে।
+// }
 
+fallback={<ProductSkeletonGrid />}
+>
 
-      </p>
+  <HomeProducts />
 
 
-    </section>
+</Suspense>
+
+
+
+
+
+
+  
+
     </>
   );
 }

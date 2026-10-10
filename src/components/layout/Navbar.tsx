@@ -1,9 +1,14 @@
 "use client";
-
+import type { Product } from "@/types/product";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import PriceTicker from "./PriceTicker";
 
+
+interface NavbarProps {
+    products: Product[];
+}
 
 const categories = [
     {name: "সকল পণ্য", href: "/"},
@@ -13,29 +18,33 @@ const categories = [
     {name: "সবজি", href: "/category/sobji"},
     {name: "মাছ", href: "/category/mach"},
     {name: "মাংস", href: "/category/mangsho"},
-    {name: "ডিম-দুধ", href: "/category/dim-dud"},
+    {name: "ডিম-দুধ", href: "/category/dim-dui"},
     {name: "মসলা", href: "/category/mosla"},
 
 
 ];
 
-export default function Navbar() {
+export default function Navbar({ products }: NavbarProps) {
 const pathname = usePathname();
 
 const [banglaDate, setBanglaDate] = useState("");
 useEffect(() => {
-const formatedDate = new Intl.DateTimeFormat("bn-BD", {
-day:"numeric",
-month:"long",
-year:"numeric",
-timeZone:"Asia/Dhaka",
-}).format(new Date());
+  const timer = setTimeout(() => {
+    const formattedDate = new Intl.DateTimeFormat("bn-BD", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "Asia/Dhaka",
+    }).format(new Date());
 
+    setBanglaDate(formattedDate);
+  }, 0);
 
-setBanglaDate(formatedDate);
-},[]);
+  return () => clearTimeout(timer);
+}, []);
 
 return (
+
     <header className="border-b border-gray-200 bg-white">
         {/* Uporar navbar */}
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
@@ -111,7 +120,9 @@ return (
         </nav>
 
 
-        {/* akhana price ticker add korta hoba  */}
+    
+
+        <PriceTicker products={products} />
 
     </header>
 );
