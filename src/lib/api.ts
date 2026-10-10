@@ -1,7 +1,7 @@
 import type { Category, Product } from "@/types/product";
 
 const PRIMARY_BASE_URL = 
-"https://api.api-store.workers.dev/api/bazardor"
+"https://openapi.programming-hero.com/api/bazardor";
 
 const FALLBACK_BASE_URL = 
 "https://api.abcz.workers.dev/api/bazardor";
