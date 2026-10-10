@@ -13,6 +13,10 @@ const categories = [
     {name: "সবজি", href: "/category/sobji"},
     {name: "মাছ", href: "/category/mach"},
     {name: "মাংস", href: "/category/mangsho"},
+    {name: "ডিম-দুধ", href: "/category/dim-dud"},
+    {name: "মসলা", href: "/category/mosla"},
+
+
 ];
 
 export default function Navbar() {
