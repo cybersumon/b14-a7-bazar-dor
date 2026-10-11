@@ -9,7 +9,9 @@ const FALLBACK_BASE_URL =
 async function fetchFromApi<T>(endpoint: string): Promise<T> {
   try {
     const response = await fetch(`${PRIMARY_BASE_URL}${endpoint}`, {
-      cache: "no-store",
+      next: {
+        revalidate:300,
+      },
     });
 
     if (!response.ok) {
@@ -19,7 +21,9 @@ async function fetchFromApi<T>(endpoint: string): Promise<T> {
     return response.json();
   } catch {
     const response = await fetch(`${FALLBACK_BASE_URL}${endpoint}`, {
-      cache: "no-store",
+        next: {
+        revalidate:300,
+      },
     });
 
     if (!response.ok) {
