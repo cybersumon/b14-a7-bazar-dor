@@ -4,6 +4,7 @@ import MarketPriceTable from "@/components/product/MarketPriceTable";
 import ProductSummary from "@/components/product/ProductSummary";
 import { getProductBySlug } from "@/lib/api";
 import { Suspense } from "react";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 interface ProductPageProps {
     params: Promise<{
@@ -50,6 +51,7 @@ async function ProductDetails( {
     }
 
     return(
+        <ProtectedRoute>
         <section className="mx-auto max-w-6xl px-4 py-12">
             <Link 
             href="/"
@@ -61,6 +63,8 @@ async function ProductDetails( {
 <MarketPriceTable markets={product.markets} />
 
         </section>
+        </ProtectedRoute>
+        
     )
     
 }
