@@ -42,7 +42,7 @@ export default function MarketPriceTable({
                             </th>
 
                             <th className="px-6 py-4 font-semibold">
-                                সব থেকে কম 
+                                সব থেকে বেশি
                             </th>
                         </tr>
                     </thead>
