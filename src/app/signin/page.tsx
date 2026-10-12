@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { authClient } from "@/lib/auth-client"
 
@@ -40,7 +41,7 @@ export default function SignInPage() {
             return;
         }
 
-
+        toast.success("সফলভাবে সাইন ইন হয়েছে")
         router.push("/");
         router.refresh();
 

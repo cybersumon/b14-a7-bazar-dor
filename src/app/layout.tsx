@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import { Suspense } from "react";
 import NavbarWithTicker from "@/components/layout/NavbarWithTicker";
+import { Toaster } from "sonner";
 
 
 
@@ -33,6 +34,8 @@ export default   function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         
         <Footer />
+        <Toaster position="bottom-right" richColors />
+
         </body>
     </html>
   );

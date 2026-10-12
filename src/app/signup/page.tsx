@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { authClient } from "@/lib/auth-client"
 
@@ -40,6 +41,8 @@ export default function SignUpPage() {
         }
 
 
+        
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে");
         router.push("/signin");
 
 

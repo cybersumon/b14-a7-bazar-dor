@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { authClient } from "@/lib/auth-client"
+import { toast } from "sonner";
 
 export default function ProtectedRoute({
     children,
@@ -15,6 +16,7 @@ export default function ProtectedRoute({
 
 useEffect(() =>{
 if (!isPending && !session?.user){
+    toast.info("পণ্যের বিস্তারিত দেখতে আগে সাইন ইন করুন");
     router.push("/signin");
 
 }
