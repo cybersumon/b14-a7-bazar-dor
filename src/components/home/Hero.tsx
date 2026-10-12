@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import heroImage from "@/assets/bazar-hero.png";
 
 
 
@@ -48,14 +50,23 @@ export default function Hero(){
 
 <div className="flex justify-center md:justify-end">
           <div className="flex h-72 w-full max-w-md items-center justify-center rounded-3xl bg-white p-8 shadow-sm">
-            <div className="text-center">
-              <div className="text-8xl">🛒</div>
+            <div className="-translate-y-6 text-center">
+              <div className="flex items-center justify-center">
+    <Image
+        src={heroImage}
+        alt="বাজার দর"
+        width={500}
+        height={400}
+        priority
+        className="h-auto w-full max-w-md object-contain"
+    />
+</div>
 
-              <p className="mt-4 text-lg font-semibold text-gray-800">
+              <p className="mt-0 text-lg font-semibold text-gray-800">
                 আজকের বাজার দর
               </p>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-0 text-sm text-gray-500">
                 প্রয়োজনীয় পণ্যের দাম এখন আরও সহজে
               </p>
             </div>
