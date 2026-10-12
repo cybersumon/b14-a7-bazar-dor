@@ -34,6 +34,9 @@ export default function SignInPage() {
             password,
         });
 
+        
+
+
         setLoading(false);
 
         if (error) {
@@ -46,6 +49,24 @@ export default function SignInPage() {
         router.refresh();
 
     }
+
+    async function handleGoogleLogin() {
+            await authClient.signIn.social({
+                provider: "google",
+                callbackURL: "/",
+            });
+            
+        }
+
+        async function handleGithubLogin() {
+            await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/",
+            });
+            
+        }
+
+
     return (
         <section className="mx-auto flex min-h-[70vh] max-w-6xl items-center justify-center px-4 py-12">
             <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -120,6 +141,33 @@ export default function SignInPage() {
 
                     </button>
                 </form>
+
+                <div className="my-6 flex items-center gap-3">
+                    <div className="h-px flex-1 bg-gray-200"></div>
+                    <span>
+                         অথবা
+                    </span>
+                    <div className="h-px flex-1 bg-gray-200 "></div>
+
+                </div>
+                <div className="space-y-3">
+                    <button
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    className="w-full cursor-pointer rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                    >
+                        Google দিয়ে সাইন ইন
+                    </button>
+
+                    <button
+                    type="button"
+                    onClick={handleGithubLogin}
+                    className="w-full cursor-pointer rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                    >
+                        Github দিয়ে সাইন ইন
+                    </button>
+
+                </div>
 
                 <p className="mt-5 text-center text-sm text-gray-600">
                     নতুন ব্যবহারকারী?{" "}

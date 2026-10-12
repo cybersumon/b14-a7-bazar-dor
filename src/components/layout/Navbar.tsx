@@ -1,7 +1,7 @@
 "use client";
 import type { Product } from "@/types/product";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PriceTicker from "./PriceTicker";
 import { authClient } from "@/lib/auth-client";
@@ -28,6 +28,7 @@ const categories = [
 
 export default function Navbar({ products }: NavbarProps) {
     const pathname = usePathname();
+    const router = useRouter();
     const { data: session, isPending } = authClient.useSession();
 
     const [banglaDate, setBanglaDate] = useState("");
@@ -78,73 +79,74 @@ export default function Navbar({ products }: NavbarProps) {
 
                             লোড হচ্ছে...
                         </span>
-                    ): session?.user ? (
+                    ) : session?.user ? (
                         <>
-                        <Link
-    href="/profile"
-    className="flex flex-col items-center gap-1 rounded-lg transition hover:opacity-80"
->
-    <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-green-100 text-sm font-bold text-green-700">
-        {session.user.image ? (
-            <Image
-                src={session.user.image}
-                alt={session.user.name || "User"}
-                width={36}
-                height={36}
-                className="h-full w-full object-cover"
-            />
-        ) : (
-            <span>
-                {session.user.name?.charAt(0).toUpperCase() || "U"}
-            </span>
-        )}
-    </div>
+                            <Link
+                                href="/profile"
+                                className="flex flex-col items-center gap-1 rounded-lg transition hover:opacity-80"
+                            >
+                                <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-green-100 text-sm font-bold text-green-700">
+                                    {session.user.image ? (
+                                        <Image
+                                            src={session.user.image}
+                                            alt={session.user.name || "User"}
+                                            width={36}
+                                            height={36}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    ) : (
+                                        <span>
+                                            {session.user.name?.charAt(0).toUpperCase() || "U"}
+                                        </span>
+                                    )}
+                                </div>
 
-    <span className="text-xs font-medium text-gray-700">
-        {session.user.name || "প্রোফাইল"}
-    </span>
-</Link>
+                                <span className="text-xs font-medium text-gray-700">
+                                    {session.user.name || "প্রোফাইল"}
+                                </span>
+                            </Link>
 
-                        <button
-                        type="button"
-                        onClick={async() => {
-                            await authClient.signOut();
-                            window.location.href = "/";
+                            <button
+                                type="button"
+                                onClick={async () => {
+                                    await authClient.signOut();
+                                    router.push("/");
+                                    router.refresh();
 
-                        }}
-                        className="ml-3 cursor-pointer rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700"
-            >
-                        
-                        সাইন আউট
+                                }}
+                                className="ml-3 cursor-pointer rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700"
+                            >
 
-                        </button>
+                                সাইন আউট
+
+                            </button>
                         </>
                     ) : (
 
                         <>
-                        <Link
-                        href="/signin"
-                        className="ml-3 cursor-pointer rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700"
-
-                        
-                        >
-
-                           সাইন ইন 
-                        
-                        </Link>
+                            <Link
+                                href="/signin"
+                                className="ml-3 cursor-pointer rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700"
 
 
-                      <Link
-                      href="/signup"
-                      className="rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white transition hover:bg-green-800"
-                      
-                      >
-                      সাইন আপ
-                      </Link>  
+                            >
+
+                                সাইন ইন
+
+                            </Link>
+
+
+                            <Link
+                                href="/signup"
+                                className="rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white transition hover:bg-green-800"
+
+                            >
+                                সাইন আপ
+                            </Link>
                         </>
                     )
-                
-                }
+
+                    }
 
                 </div>
                 {/* <div className="flex items-center gap-3">
@@ -182,8 +184,8 @@ export default function Navbar({ products }: NavbarProps) {
                             <Link
                                 key={category.href}
                                 href={category.href} className={`rounded-md px-4 py-2 text-sm font-medium transition ${isActive
-                                        ? "bg-green-100 text-green-700"
-                                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                                    ? "bg-green-100 text-green-700"
+                                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                                     }`}
                             >
                                 {category.name}
